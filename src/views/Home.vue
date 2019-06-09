@@ -6,15 +6,14 @@
 
 <script>
 export default {
-  name: "home",
+  name: "home"
 };
 </script>
 
 <style lang="scss" scoped>
-
 nav {
   height: 12rem;
-  background: #084C61;
+  background: #084c61;
   color: whitesmoke;
 }
 
@@ -25,4 +24,3 @@ nav {
   }
 }
 </style>
-
