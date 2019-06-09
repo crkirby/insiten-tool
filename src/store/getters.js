@@ -5,6 +5,6 @@ const getters = {
   getCurrentCompany: state => {
     return state.currentCompany;
   }
-}
+};
 
 export default getters;
