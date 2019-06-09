@@ -1,25 +1,28 @@
 <template>
-  <div> 
-    <Header />
-    <Companies class="container"/>
-  </div>
+  <nav>
+    <h1 class="heading-title--xlg">Welcome to MergElite</h1>
+  </nav>
 </template>
 
 <script>
-// @ is an alias to /src
-import Companies from "@/components/Companies.vue";
-import Header from "@/components/Header.vue";
-
 export default {
   name: "home",
-  components: {
-    Companies,
-    Header
-  }
 };
 </script>
 
 <style lang="scss" scoped>
 
+nav {
+  height: 12rem;
+  background: #084C61;
+  color: whitesmoke;
+}
+
+.heading-title {
+  font-size: 1.2rem;
+  &--xlg {
+    font-size: 5.6rem;
+  }
+}
 </style>
 
