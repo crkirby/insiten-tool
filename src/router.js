@@ -8,13 +8,14 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "home",
+      name: "Home",
       component: Home
     },
     {
       path: "/dashboard",
       name: "Dashboard",
       component: () => import("./views/Dashboard.vue")
-    }
+    },
+    { path: "*", component: Home }
   ]
 });

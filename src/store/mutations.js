@@ -2,6 +2,9 @@ const mutations = {
   SET_CURRENT_COMPANY: (state, company) => {
     state.currentCompany = company;
   },
+  ADD_COMPANY: (state, company) => {
+    state.companies.unshift(company);
+  },
   DELETE_COMPANY: (state, { id }) => {
     const companies = state.companies.slice();
     const companyIndex = companies.findIndex(company => company.id === id);
