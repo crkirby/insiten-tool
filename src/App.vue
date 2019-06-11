@@ -14,5 +14,6 @@
 
 #app {
   background: rgba(lightgray, 0.05);
+  width: 100vw;
 }
 </style>

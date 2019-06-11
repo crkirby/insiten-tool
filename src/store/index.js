@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import mutations from "./mutations";
 import getters from "./getters";
+import faker from "faker";
 
 Vue.use(Vuex);
 
@@ -11,135 +12,347 @@ export default new Vuex.Store({
     companies: [
       {
         id: 1,
-        name: "Company A",
-        dateCreated: new Date().toLocaleDateString(),
-        state: "City, State",
-        grossRevenue: 1000000,
-        address: "123 abc rd",
-        phoneNumber: "123-123-1234",
-        website: "www.abc.com",
-        emps: 4,
-        type: "string",
-        comparableGrowth: -0.1,
-        status: "Researching",
+        name: faker.company.companyName(),
+        dateCreated: faker.date
+          .past(0, new Date().toJSON())
+          .toLocaleDateString(),
+        state: `${faker.address.cityPrefix()}${faker.address.citySuffix()}, ${faker.address.stateAbbr()}`,
+        grossRevenue: faker.random.number({ min: 10000, max: 1e8 }),
+        address: `${faker.address.streetAddress()}`,
+        phoneNumber: faker.phone.phoneNumber("(###)-###-####"),
+        website: faker.internet.url(),
+        emps: faker.random.number({ min: 10, max: 700 }),
+        type: faker.name.jobArea(),
+        comparableGrowth: faker.random.arrayElement([
+          0,
+          faker.finance.amount(
+            -1 * faker.random.number({ max: 100 }),
+            faker.random.number({ max: 100 }),
+            2
+          )
+        ]),
+        status: faker.random.arrayElement([
+          "Researching",
+          "Declined",
+          "Pending",
+          "Approved"
+        ]),
         keyContacts: [
-          { id: 8733, name: "juan", number: "233-323-4343", title: "CEO" },
           {
-            id: 7421,
-            name: "gina",
-            number: "233-323-4343",
-            title: "VP of Sales"
+            id: faker.random.uuid(),
+            name: faker.name.findName(
+              faker.name.firstName(),
+              faker.name.lastName()
+            ),
+            number: faker.phone.phoneNumber("(###)-###-####"),
+            title: faker.name.jobTitle()
           }
         ]
       },
       {
         id: 2,
-        name: "Company B",
-        dateCreated: new Date().toLocaleDateString(),
-        state: "City, State",
-        grossRevenue: 2000000,
-        address: "123 abc rd",
-        phoneNumber: "123-123-1234",
-        website: "www.abc.com",
-        emps: 4,
-        type: "string",
-        comparableGrowth: 0.1,
-        status: "Approved",
+        name: faker.company.companyName(),
+        dateCreated: faker.date
+          .past(0, new Date().toJSON())
+          .toLocaleDateString(),
+        state: `${faker.address.city()}, ${faker.address.stateAbbr()}`,
+        grossRevenue: faker.random.number({ min: 10000, max: 1e7 }),
+        address: `${faker.address.streetAddress()}`,
+        phoneNumber: faker.phone.phoneNumber("(###)-###-####"),
+        website: faker.internet.url(),
+        emps: faker.random.number({ min: 90, max: 1000 }),
+        type: faker.name.jobArea(),
+        comparableGrowth: faker.random.arrayElement([
+          0,
+          faker.finance.amount(
+            -1 * faker.random.number({ max: 100 }),
+            faker.random.number({ max: 100 }),
+            2
+          )
+        ]),
+        status: faker.random.arrayElement([
+          "Researching",
+          "Declined",
+          "Pending",
+          "Approved"
+        ]),
         keyContacts: [
-          { id: 8374, name: "alex", number: "233-323-4343", title: "CEO" },
-          { id: 8322, name: "paul", number: "233-323-4343", title: "CEO" },
-          { id: 6677, name: "alex", number: "233-323-4343", title: "CEO" },
           {
-            id: 1122,
-            name: "dylan",
-            number: "635-973-1132",
-            title: "Head Secretary"
+            id: faker.random.number({ min: 30, max: 45 }),
+            name: faker.name.findName(
+              faker.name.firstName(),
+              faker.name.lastName()
+            ),
+            number: faker.phone.phoneNumber("(###)-###-####"),
+            title: faker.name.jobTitle()
+          },
+          {
+            id: faker.random.number({ min: 10, max: 20 }),
+            name: faker.name.findName(
+              faker.name.firstName(),
+              faker.name.lastName()
+            ),
+            number: faker.phone.phoneNumber("(###)-###-####"),
+            title: faker.name.jobTitle()
+          },
+          {
+            id: faker.random.number({ min: 10, max: 20 }),
+            name: faker.name.findName(
+              faker.name.firstName(),
+              faker.name.lastName()
+            ),
+            number: faker.phone.phoneNumber("(###)-###-####"),
+            title: faker.name.jobTitle()
+          },
+          {
+            id: faker.random.number({ min: 10, max: 20 }),
+            name: faker.name.findName(
+              faker.name.firstName(),
+              faker.name.lastName()
+            ),
+            number: faker.phone.phoneNumber("(###)-###-####"),
+            title: faker.name.jobTitle()
           }
         ]
       },
       {
         id: 3,
-        name: "Company C",
-        dateCreated: new Date().toLocaleDateString(),
-        state: "City, State",
-        grossRevenue: 3000000,
-        address: "123 abc rd",
-        phoneNumber: "123-123-1234",
-        website: "www.abc.com",
-        emps: 4,
-        type: "string",
-        comparableGrowth: 1.0123,
-        status: "Approved",
+        name: faker.company.companyName(),
+        dateCreated: faker.date
+          .past(0, new Date().toJSON())
+          .toLocaleDateString(),
+        state: `${faker.address.city()}, ${faker.address.stateAbbr()}`,
+        grossRevenue: faker.random.number({ min: 10000, max: 1e8 }),
+        address: `${faker.address.streetAddress()}`,
+        phoneNumber: faker.phone.phoneNumber("(###)-###-####"),
+        website: faker.internet.url(),
+        emps: faker.random.number({ min: 100, max: 500 }),
+        type: faker.name.jobArea(),
+        comparableGrowth: faker.random.arrayElement([
+          0,
+          faker.finance.amount(
+            -1 * faker.random.number({ max: 100 }),
+            faker.random.number({ max: 100 }),
+            2
+          )
+        ]),
+        status: faker.random.arrayElement([
+          "Researching",
+          "Declined",
+          "Pending",
+          "Approved"
+        ]),
         keyContacts: [
-          { id: 93, name: "shawn", number: "233-323-4343", title: "CEO" }
+          {
+            id: faker.random.number({ min: 5, max: 15 }),
+            name: faker.name.findName(
+              faker.name.firstName(),
+              faker.name.lastName()
+            ),
+            number: faker.phone.phoneNumber("(###)-###-####"),
+            title: faker.name.jobTitle()
+          },
+          {
+            id: faker.random.number({ min: 20, max: 30 }),
+            name: faker.name.findName(
+              faker.name.firstName(),
+              faker.name.lastName()
+            ),
+            number: faker.phone.phoneNumber("(###)-###-####"),
+            title: faker.name.jobTitle()
+          }
         ]
       },
       {
         id: 4,
-        name: "Company D",
-        dateCreated: new Date().toLocaleDateString(),
-        state: "City, State",
-        grossRevenue: 3000000,
-        address: "123 abc rd",
-        phoneNumber: "123-123-1234",
-        website: "www.abc.com",
-        emps: 4,
-        type: "string",
-        comparableGrowth: -0.01,
-        status: "Declined",
+        name: faker.company.companyName(),
+        dateCreated: faker.date
+          .past(0, new Date().toJSON())
+          .toLocaleDateString(),
+        state: `${faker.address.city()}, ${faker.address.stateAbbr()}`,
+        grossRevenue: faker.random.number({ min: 10000, max: 1e7 }),
+        address: `${faker.address.streetAddress()}`,
+        phoneNumber: faker.phone.phoneNumber("(###)-###-####"),
+        website: faker.internet.url(),
+        emps: faker.random.number({ min: 200, max: 1000 }),
+        type: faker.name.jobArea(),
+        comparableGrowth: faker.random.arrayElement([
+          0,
+          faker.finance.amount(
+            -1 * faker.random.number({ max: 100 }),
+            faker.random.number({ max: 100 }),
+            2
+          )
+        ]),
+        status: faker.random.arrayElement([
+          "Researching",
+          "Declined",
+          "Pending",
+          "Approved"
+        ]),
         keyContacts: [
-          { id: 73, name: "charlotte", number: "233-323-4343", title: "CEO" }
+          {
+            id: faker.random.number({ min: 30, max: 45 }),
+            name: faker.name.findName(
+              faker.name.firstName(),
+              faker.name.lastName()
+            ),
+            number: faker.phone.phoneNumber("(###)-###-####"),
+            title: faker.name.jobTitle()
+          },
+          {
+            id: faker.random.number({ min: 10, max: 20 }),
+            name: faker.name.findName(
+              faker.name.firstName(),
+              faker.name.lastName()
+            ),
+            number: faker.phone.phoneNumber("(###)-###-####"),
+            title: faker.name.jobTitle()
+          }
         ]
       },
       {
         id: 5,
-        name: "Company E",
-        dateCreated: new Date().toLocaleDateString(),
-        state: "City, State",
-        grossRevenue: 2000000,
-        address: "123 abc rd",
-        phoneNumber: "123-123-1234",
-        website: "www.abc.com",
-        emps: 4,
-        type: "string",
-        comparableGrowth: 0,
-        status: "Declined",
+        name: faker.company.companyName(),
+        dateCreated: faker.date
+          .past(0, new Date().toJSON())
+          .toLocaleDateString(),
+        state: `${faker.address.city()}, ${faker.address.stateAbbr()}`,
+        grossRevenue: faker.random.number({ min: 10000, max: 1e7 }),
+        address: `${faker.address.streetAddress()}`,
+        phoneNumber: faker.phone.phoneNumber("(###)-###-####"),
+        website: faker.internet.url(),
+        emps: faker.random.number({ min: 20, max: 1000 }),
+        type: faker.name.jobArea(),
+        comparableGrowth: faker.random.arrayElement([
+          0,
+          faker.finance.amount(
+            -1 * faker.random.number({ max: 100 }),
+            faker.random.number({ max: 100 }),
+            2
+          )
+        ]),
+        status: faker.random.arrayElement([
+          "Researching",
+          "Declined",
+          "Pending",
+          "Approved"
+        ]),
         keyContacts: [
-          { id: 893, name: "derrick", number: "233-323-4343", title: "CEO" }
+          {
+            id: faker.random.number({ min: 30, max: 45 }),
+            name: faker.name.findName(
+              faker.name.firstName(),
+              faker.name.lastName()
+            ),
+            number: faker.phone.phoneNumber("(###)-###-####"),
+            title: faker.name.jobTitle()
+          },
+          {
+            id: faker.random.number({ min: 10, max: 20 }),
+            name: faker.name.findName(
+              faker.name.firstName(),
+              faker.name.lastName()
+            ),
+            number: faker.phone.phoneNumber("(###)-###-####"),
+            title: faker.name.jobTitle()
+          }
         ]
       },
       {
         id: 6,
-        name: "Company F",
-        dateCreated: new Date().toLocaleDateString(),
-        state: "City, State",
-        grossRevenue: 2000000,
-        address: "123 abc rd",
-        phoneNumber: "123-123-1234",
-        website: "www.abc.com",
-        emps: 4,
-        type: "string",
-        comparableGrowth: -0.013,
-        status: "Declined",
+        name: faker.company.companyName(),
+        dateCreated: faker.date
+          .past(0, new Date().toJSON())
+          .toLocaleDateString(),
+        state: `${faker.address.city()}, ${faker.address.stateAbbr()}`,
+        grossRevenue: faker.random.number({ min: 10000, max: 1e9 }),
+        address: `${faker.address.streetAddress()}`,
+        phoneNumber: faker.phone.phoneNumber("(###)-###-####"),
+        website: faker.internet.url(),
+        emps: faker.random.number({ min: 20, max: 1000 }),
+        type: faker.name.jobArea(),
+        comparableGrowth: faker.random.arrayElement([
+          0,
+          faker.finance.amount(
+            -1 * faker.random.number({ max: 100 }),
+            faker.random.number({ max: 100 }),
+            2
+          )
+        ]),
+        status: faker.random.arrayElement([
+          "Researching",
+          "Declined",
+          "Pending",
+          "Approved"
+        ]),
         keyContacts: [
-          { id: 234, name: "ruth", number: "233-323-4343", title: "CEO" }
+          {
+            id: faker.random.number({ min: 30, max: 45 }),
+            name: faker.name.findName(
+              faker.name.firstName(),
+              faker.name.lastName()
+            ),
+            number: faker.phone.phoneNumber("(###)-###-####"),
+            title: faker.name.jobTitle()
+          },
+          {
+            id: faker.random.number({ min: 10, max: 20 }),
+            name: faker.name.findName(
+              faker.name.firstName(),
+              faker.name.lastName()
+            ),
+            number: faker.phone.phoneNumber("(###)-###-####"),
+            title: faker.name.jobTitle()
+          }
         ]
       },
       {
         id: 8,
-        name: "Company G",
-        dateCreated: new Date().toLocaleDateString(),
-        state: "City, State",
-        grossRevenue: 3000000,
-        address: "123 abc rd",
-        phoneNumber: "123-123-1234",
-        website: "www.abc.com",
-        emps: 4,
-        type: "string",
-        comparableGrowth: 0.1,
-        status: "Pending",
+        name: faker.company.companyName(),
+        dateCreated: faker.date
+          .past(0, new Date().toJSON())
+          .toLocaleDateString(),
+        state: `${faker.address.city()}, ${faker.address.stateAbbr()}`,
+        grossRevenue: faker.random.number({ min: 10000, max: 1e8 }),
+        address: `${faker.address.streetAddress()}`,
+        phoneNumber: faker.phone.phoneNumber("(###)-###-####"),
+        website: faker.internet.url(),
+        emps: faker.random.number({ min: 20, max: 1000 }),
+        type: faker.name.jobArea(),
+        comparableGrowth: faker.random.arrayElement([
+          0,
+          faker.finance.amount(
+            -1 * faker.random.number({ max: 100 }),
+            faker.random.number({ max: 100 }),
+            2
+          )
+        ]),
+        status: faker.random.arrayElement([
+          "Researching",
+          "Declined",
+          "Pending",
+          "Approved"
+        ]),
         keyContacts: [
-          { id: 123, name: "stephanie", number: "233-323-4343", title: "CEO" }
+          {
+            id: faker.random.number({ min: 30, max: 45 }),
+            name: faker.name.findName(
+              faker.name.firstName(),
+              faker.name.lastName()
+            ),
+            number: faker.phone.phoneNumber("(###)-###-####"),
+            title: faker.name.jobTitle()
+          },
+          {
+            id: faker.random.number({ min: 10, max: 20 }),
+            name: faker.name.findName(
+              faker.name.firstName(),
+              faker.name.lastName()
+            ),
+            number: faker.phone.phoneNumber("(###)-###-####"),
+            title: faker.name.jobTitle()
+          }
         ]
       }
     ]

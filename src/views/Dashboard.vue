@@ -1,8 +1,13 @@
 <template>
   <div>
     <div class="header-container">
-      <div class="company company-welcome">Active Acquisitions</div>
-      <button class="company company-addMerger">Add new merger</button>
+      <div class="company company-welcome">
+        Active Acquisitions
+        <span class="company__count">{{ companyCount }}</span>
+      </div>
+      <button @click="showNewCompanyModal()" class="company company__addMerger">
+        Add new merger
+      </button>
     </div>
     <Acquisitions />
   </div>
@@ -10,9 +15,22 @@
 
 <script>
 import Acquisitions from "@/components/Acquisitions";
+import NewCompanyModal from "@/components/NewCompanyModal";
+import { mapGetters } from "vuex";
 export default {
   name: "Dashboard",
-  components: { Acquisitions }
+  computed: {
+    ...mapGetters({ currentCompanies: "getCompanies" }),
+    companyCount: function() {
+      return this.currentCompanies.length;
+    }
+  },
+  components: { Acquisitions },
+  methods: {
+    showNewCompanyModal: function() {
+      this.$modal.show(NewCompanyModal, {}, { height: "auto" });
+    }
+  }
 };
 </script>
 
@@ -38,7 +56,15 @@ export default {
   color: whitesmoke;
   font-size: 2.4rem;
 
-  &-addMerger {
+  &__count {
+    background: white;
+    padding: 0.6rem 1.3rem;
+    text-align: center;
+    border-radius: 100%;
+    color: #177e89;
+  }
+
+  &__addMerger {
     background: #de1f26;
     border: none;
     box-shadow: 0.3rem 0.5rem 0.3rem #084c61;

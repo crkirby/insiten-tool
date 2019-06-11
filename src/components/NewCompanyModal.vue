@@ -1,6 +1,6 @@
 <template>
   <div class="current-company">
-    <h1 class="heading-title--lg">{{ currentCompany.name }}</h1>
+    <h1 class="heading-title--lg">Create a new target</h1>
 
     <h2 class="heading-title--sm">Company Info</h2>
     <div class="info">
@@ -8,7 +8,6 @@
         <label>Name</label>
         <input
           autocomplete="off"
-          @input="editField($event)"
           name="name"
           type="text"
           v-model.trim="company.name"
@@ -19,7 +18,6 @@
         <label>Address</label>
         <input
           autocomplete="off"
-          @input="editField($event)"
           name="address"
           type="text"
           v-model.trim="company.address"
@@ -30,7 +28,6 @@
         <label>State</label>
         <input
           autocomplete="off"
-          @input="editField($event)"
           name="state"
           type="text"
           v-model.trim="company.state"
@@ -41,7 +38,6 @@
         <label>Phone number</label>
         <input
           autocomplete="off"
-          @input="editField($event)"
           name="phoneNumber"
           type="text"
           v-model.trim="company.phoneNumber"
@@ -52,7 +48,6 @@
         <label>Website</label>
         <input
           autocomplete="off"
-          @input="editField($event)"
           name="website"
           type="text"
           v-model.trim="company.website"
@@ -63,7 +58,6 @@
         <label>Type</label>
         <input
           autocomplete="off"
-          @input="editField($event)"
           name="type"
           type="text"
           v-model.trim="company.type"
@@ -78,7 +72,6 @@
         <label>Gross Revenue</label>
         <input
           name="grossRevenue"
-          @input="editField($event)"
           type="number"
           min="0"
           v-model.number="company.grossRevenue"
@@ -89,7 +82,6 @@
         <label>Comparable Growth</label>
         <input
           name="comparableGrowth"
-          @input="editField($event)"
           type="number"
           step="0.01"
           v-model.number="company.comparableGrowth"
@@ -100,7 +92,6 @@
         <label>Employees</label>
         <input
           name="emps"
-          @input="editField($event)"
           type="number"
           min="0"
           v-model.number="company.emps"
@@ -114,7 +105,6 @@
       <div class="merger__status">
         <label>Status</label>
         <input
-          @input="editField($event)"
           name="status"
           type="text"
           v-model.trim="company.status"
@@ -163,29 +153,26 @@
         />
       </div>
 
-      <ul v-for="(contact, index) in company.keyContacts" :key="contact.id">
-        <li class="no-dot" :key="contactChangeKey">
+      <ul v-for="contact in company.keyContacts" :key="contact.id">
+        <li class="no-dot">
           <img
             :src="trashImage"
             class="image-trash"
             @click="removeKeyContact(contact.id)"
           />
           <input
-            @input="editField($event, index)"
             name="name"
             type="text"
             v-model.trim="contact.name"
             placeholder="Enter contact name"
           />
           <input
-            @input="editField($event, index)"
             name="title"
             type="text"
             v-model.trim="contact.title"
             placeholder="Enter contact professional title"
           />
           <input
-            @input="editField($event, index)"
             name="number"
             type="text"
             v-model.trim="contact.number"
@@ -200,15 +187,7 @@
         Cancel
       </button>
 
-      <button
-        type="button"
-        class="btn btn__delete"
-        v-if="showDeleteBtn"
-        @click="deleteCompany()"
-      >
-        Delete
-      </button>
-      <button type="button" class="btn btn__save" v-else @click="saveChanges()">
+      <button type="button" class="btn btn__save" @click="saveChanges()">
         Save changes
       </button>
     </div>
@@ -216,26 +195,22 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapMutations } from "vuex";
 import trashCan from "@/assets/trash.png";
 import plusSign from "@/assets/add.png";
 import cancel from "@/assets/cancel.png";
 
 export default {
-  name: "EditCompanyModal",
-  created: function() {
-    this.company = JSON.parse(JSON.stringify(this.currentCompany));
-  },
+  name: "NewCompanyModal",
   data: function() {
     return {
-      showDeleteBtn: true,
       showContactField: false,
+      company: { dateCreated: new Date().toLocaleDateString() },
       newContact: {},
-      contactChangeKey: 0
+      canAddKeyContact: true
     };
   },
   computed: {
-    ...mapGetters({ currentCompany: "getCurrentCompany" }),
     trashImage: function() {
       return trashCan;
     },
@@ -244,47 +219,27 @@ export default {
     },
     cancelImage: function() {
       return cancel;
-    },
-    canAddKeyContact: function() {
-      return this.company.keyContacts
-        ? this.company.keyContacts.length < 4
-        : true;
     }
   },
   methods: {
-    ...mapMutations(["DELETE_COMPANY", "UPDATE_COMPANY"]),
+    ...mapMutations(["ADD_COMPANY"]),
     closeModal: function() {
       this.$emit("close");
     },
     addNewContact: function({ target: { name: key, value } }) {
       this.newContact[key] = value;
     },
-    deleteCompany: function() {
-      this.DELETE_COMPANY(this.company);
-      this.closeModal();
-    },
-    editField: function({ target: { name: key, value } }, index = null) {
-      const valueChanged =
-        (index != null
-          ? this.currentCompany.keyContacts[index][key]
-          : this.currentCompany[key]) != value;
-      this.showDeleteBtn = valueChanged ? false : true;
-    },
     hideAddContactField: function() {
       this.newContact = {};
-      this.showDeleteBtn = true;
       this.showContactField = false;
     },
     showAddContactField: function() {
-      this.showDeleteBtn = false;
       this.showContactField = true;
     },
     removeKeyContact: function(id) {
       this.company.keyContacts = this.company.keyContacts.filter(
         contact => contact.id !== id
       );
-      this.showDeleteBtn = false;
-      this.contactChangeKey = this.contactChangeKey + 1;
     },
     saveChanges: function() {
       const contactValues = Object.values(this.newContact);
@@ -299,7 +254,7 @@ export default {
           this.company.keyContacts = contacts;
         }
       }
-      this.UPDATE_COMPANY(this.company);
+      this.ADD_COMPANY(this.company);
       this.newContact = {};
       this.closeModal();
     }
