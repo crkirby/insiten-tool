@@ -1,8 +1,13 @@
 <template>
   <div>
     <div class="header-container">
-      <div class="company company-welcome">Active Acquisitions <span class="company__count">{{ companyCount }}</span></div>
-      <button @click="showNewCompanyModal()" class="company company__addMerger">Add new merger</button>
+      <div class="company company-welcome">
+        Active Acquisitions
+        <span class="company__count">{{ companyCount }}</span>
+      </div>
+      <button @click="showNewCompanyModal()" class="company company__addMerger">
+        Add new merger
+      </button>
     </div>
     <Acquisitions />
   </div>
@@ -11,19 +16,19 @@
 <script>
 import Acquisitions from "@/components/Acquisitions";
 import NewCompanyModal from "@/components/NewCompanyModal";
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 export default {
   name: "Dashboard",
   computed: {
-    ...mapGetters({ currentCompanies: 'getCompanies'}),
-    companyCount: function () {
-      return this.currentCompanies.length
+    ...mapGetters({ currentCompanies: "getCompanies" }),
+    companyCount: function() {
+      return this.currentCompanies.length;
     }
   },
   components: { Acquisitions },
   methods: {
-    showNewCompanyModal: function (){
-      this.$modal.show(NewCompanyModal, {}, { height: 'auto' })
+    showNewCompanyModal: function() {
+      this.$modal.show(NewCompanyModal, {}, { height: "auto" });
     }
   }
 };
@@ -53,7 +58,7 @@ export default {
 
   &__count {
     background: white;
-    padding: .6rem 1.3rem;
+    padding: 0.6rem 1.3rem;
     text-align: center;
     border-radius: 100%;
     color: #177e89;

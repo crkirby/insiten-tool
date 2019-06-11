@@ -15,7 +15,7 @@
           placeholder="Enter company name"
         />
       </div>
-        <div class="info__address">
+      <div class="info__address">
         <label>Address</label>
         <input
           autocomplete="off"
@@ -25,8 +25,8 @@
           v-model.trim="company.address"
           placeholder="Enter address (e.g., 123 abc rd)"
         />
-        </div>
-        <div class="info__state">
+      </div>
+      <div class="info__state">
         <label>State</label>
         <input
           autocomplete="off"
@@ -36,8 +36,8 @@
           v-model.trim="company.state"
           placeholder="Enter the (city, state)"
         />
-        </div>
-        <div class="info__phoneNumber">
+      </div>
+      <div class="info__phoneNumber">
         <label>Phone number</label>
         <input
           autocomplete="off"
@@ -47,8 +47,8 @@
           v-model.trim="company.phoneNumber"
           placeholder="Enter phone number"
         />
-        </div>
-        <div class="info__website">
+      </div>
+      <div class="info__website">
         <label>Website</label>
         <input
           autocomplete="off"
@@ -58,8 +58,8 @@
           v-model.trim="company.website"
           placeholder="Enter website url"
         />
-        </div>
-        <div class="info__type">
+      </div>
+      <div class="info__type">
         <label>Type</label>
         <input
           autocomplete="off"
@@ -69,57 +69,57 @@
           v-model.trim="company.type"
           placeholder="Enter type of business"
         />
-        </div>
+      </div>
     </div>
 
     <h2 class="heading-title--sm">Financial Performance</h2>
     <div class="financials">
       <div class="financials__gross">
-      <label>Gross Revenue</label>
-      <input
-        name="grossRevenue"
-        @input="editField($event)"
-        type="number"
-        min="0"
-        v-model.number="company.grossRevenue"
-        placeholder="Enter gross revenue"
-      />
+        <label>Gross Revenue</label>
+        <input
+          name="grossRevenue"
+          @input="editField($event)"
+          type="number"
+          min="0"
+          v-model.number="company.grossRevenue"
+          placeholder="Enter gross revenue"
+        />
       </div>
       <div class="financials__comparable">
-      <label>Comparable Growth</label>
-      <input
-        name="comparableGrowth"
-        @input="editField($event)"
-        type="number"
-        step="0.01"
-        v-model.number="company.comparableGrowth"
-        placeholder="Enter comparable growth"
-      />
+        <label>Comparable Growth</label>
+        <input
+          name="comparableGrowth"
+          @input="editField($event)"
+          type="number"
+          step="0.01"
+          v-model.number="company.comparableGrowth"
+          placeholder="Enter comparable growth"
+        />
       </div>
       <div class="financials__employees">
-      <label>Employees</label>
-      <input
-        name="emps"
-        @input="editField($event)"
-        type="number"
-        min="0"
-        v-model.number="company.emps"
-        placeholder="Enter number of employees"
-      />
+        <label>Employees</label>
+        <input
+          name="emps"
+          @input="editField($event)"
+          type="number"
+          min="0"
+          v-model.number="company.emps"
+          placeholder="Enter number of employees"
+        />
       </div>
     </div>
 
     <h2 class="heading-title--sm">Merger status</h2>
     <div class="merger">
       <div class="merger__status">
-      <label>Status</label>
-      <input
-        @input="editField($event)"
-        name="status"
-        type="text"
-        v-model.trim="company.status"
-        placeholder="Enter status"
-      />
+        <label>Status</label>
+        <input
+          @input="editField($event)"
+          name="status"
+          type="text"
+          v-model.trim="company.status"
+          placeholder="Enter status"
+        />
       </div>
     </div>
 
@@ -246,7 +246,9 @@ export default {
       return cancel;
     },
     canAddKeyContact: function() {
-      return this.company.keyContacts ? this.company.keyContacts.length < 4 : true
+      return this.company.keyContacts
+        ? this.company.keyContacts.length < 4
+        : true;
     }
   },
   methods: {
@@ -292,9 +294,9 @@ export default {
         );
         if (!containsEmptyValues) {
           const id = Math.floor(Math.random() * 3048733) + 9000;
-          let contacts = this.company.keyContacts || []
+          let contacts = this.company.keyContacts || [];
           contacts.push({ ...this.newContact, id });
-          this.company.keyContacts = contacts
+          this.company.keyContacts = contacts;
         }
       }
       this.UPDATE_COMPANY(this.company);
@@ -308,7 +310,7 @@ export default {
 <style lang="scss">
 .current-company {
   margin: 2rem;
-  color:#084c61;
+  color: #084c61;
   font-weight: bold;
 }
 
@@ -379,7 +381,12 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
 
-  &__name, &__address, &__state, &__phoneNumber, &__website, &__type {
+  &__name,
+  &__address,
+  &__state,
+  &__phoneNumber,
+  &__website,
+  &__type {
     flex: 0 0 33%;
     input {
       padding: 0.8rem;
@@ -395,7 +402,9 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
 
-  &__gross, &__comparable, &__employees {
+  &__gross,
+  &__comparable,
+  &__employees {
     flex: 0 0 33%;
     input {
       padding: 0.8rem;
@@ -419,7 +428,6 @@ export default {
       margin: 0.7rem 0rem;
     }
   }
-
 }
 
 .key-contacts {
