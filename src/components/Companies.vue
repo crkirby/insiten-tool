@@ -28,8 +28,8 @@
         </button>
       </div>
     </fragment>
-    <div v-if="lastRequested" class="request">
-      <button @click="hideReminder()" class="btn--close" style="float:right">
+    <div id="requestBanner" v-if="lastRequested" class="request">
+      <button id="closeBanner" @click="hideReminder()" class="btn--close" style="float:right">
         X
       </button>
       <p class="request--message">
@@ -71,7 +71,7 @@ export default {
       lastRequested: null,
       companies: [
         {
-          id: faker.random.number({ min: 80, max: 90 }),
+          id: 83,
           name: faker.company.companyName(),
           dateCreated: new Date().toLocaleDateString(),
           state: `${faker.address.city()}, ${faker.address.stateAbbr()}`,

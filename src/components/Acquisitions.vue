@@ -27,6 +27,7 @@
         <div class="company company--status">{{ company.status }}</div>
         <div class="company company--emps">{{ company.emps }}</div>
         <button
+          id="editBtn"
           @click="showEditCompanyModal(company)"
           class="company company--editBtn"
         >
