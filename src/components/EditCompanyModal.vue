@@ -247,12 +247,12 @@ export default {
     },
     canAddKeyContact: function() {
       return this.company.keyContacts
-        ? this.company.keyContacts.length < 4
-        : true;
+        ? this.currentCompany.keyContacts.length < 4
+        : false;
     }
   },
   methods: {
-    ...mapMutations(["DELETE_COMPANY", "UPDATE_COMPANY"]),
+    ...mapMutations(["DELETE_COMPANY", "UPDATE_COMPANY", "SET_CURRENT_COMPANY"]),
     closeModal: function() {
       this.$emit("close");
     },
@@ -300,8 +300,10 @@ export default {
         }
       }
       this.UPDATE_COMPANY(this.company);
+      this.SET_CURRENT_COMPANY(this.company)
       this.newContact = {};
-      this.closeModal();
+      this.showContactField = false
+      this.showDeleteBtn = true
     }
   }
 };
