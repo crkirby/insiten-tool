@@ -4,7 +4,7 @@ import store from "@/store/index";
 import faker from "faker";
 import filters from "@/filters/filters";
 
-describe("Comapnies.vue", () => {
+describe("Companies.vue", () => {
   const data = {
     lastRequested: null,
     companies: [
