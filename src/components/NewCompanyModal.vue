@@ -142,7 +142,7 @@
           name="title"
           v-model.trim="newContact.title"
           type="text"
-          placeholder="Enter contact professional title"
+          placeholder="Enter professional title"
         />
         <input
           @input="addNewContact($event)"
@@ -170,7 +170,7 @@
             name="title"
             type="text"
             v-model.trim="contact.title"
-            placeholder="Enter contact professional title"
+            placeholder="Enter professional title"
           />
           <input
             name="number"
@@ -280,14 +280,7 @@ export default {
 }
 
 .image-cancel {
-  position: relative;
-  left: 0.4%;
   margin-bottom: -0.4rem;
-}
-
-.new-contact {
-  margin-left: -0.3rem;
-  margin-right: 0.3rem;
 }
 
 .company-name {
@@ -400,5 +393,22 @@ export default {
 
 li.no-dot {
   list-style: none;
+}
+
+@media (max-width: 34.6rem) { 
+  div.new-contact {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    img.image-cancel {
+      align-self: baseline;
+    }
+    input {
+      flex: 1;
+      padding: 0.8rem;
+      width: 29%;
+      margin: 0.7rem 0.5rem;
+    }
+  }
 }
 </style>

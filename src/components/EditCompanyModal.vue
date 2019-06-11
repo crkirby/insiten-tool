@@ -134,9 +134,8 @@
         />
       </h3>
 
-      <div class="new-contact" v-if="showContactField">
+        <div class="new-contact" v-if="showContactField">
         <img
-          class="image-cancel"
           :src="cancelImage"
           @click="hideAddContactField()"
         />
@@ -152,7 +151,7 @@
           name="title"
           v-model.trim="newContact.title"
           type="text"
-          placeholder="Enter contact professional title"
+          placeholder="Enter professional title"
         />
         <input
           @input="addNewContact($event)"
@@ -182,7 +181,7 @@
             name="title"
             type="text"
             v-model.trim="contact.title"
-            placeholder="Enter contact professional title"
+            placeholder="Enter professional title"
           />
           <input
             @input="editField($event, index)"
@@ -322,21 +321,6 @@ export default {
   margin-bottom: -0.3rem;
 }
 
-.image-trash {
-  margin-bottom: -0.3rem;
-}
-
-.image-cancel {
-  position: relative;
-  left: 0.4%;
-  margin-bottom: -0.4rem;
-}
-
-.new-contact {
-  margin-left: -0.3rem;
-  margin-right: 0.3rem;
-}
-
 .company-name {
   font-weight: 300;
 }
@@ -434,6 +418,12 @@ export default {
 
 .key-contacts {
   margin: 1rem 0;
+  li {
+    display: flex;
+    list-style: none;
+    align-items: baseline; 
+  }
+
   input {
     padding: 0.8rem;
     width: 30%;
@@ -445,7 +435,34 @@ export default {
   margin-top: 1.5rem;
 }
 
-li.no-dot {
-  list-style: none;
-}
+
+@media (max-width: 54.6rem) { 
+    button.btn {
+      width: 100% ;
+      
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+      }
+    }
+
+    .key-contacts {
+      margin: 1rem 0;
+      div.new-contact {
+        display: flex;
+        list-style: none;
+        align-items: baseline; 
+        input {
+          padding: 0.8rem;
+          width: 30%;
+          margin: 0.7rem 0.55rem;
+        }
+      }
+
+      input {
+        padding: 0.8rem;
+        width: 30%;
+        margin: 0.7rem 0.65rem;
+      }
+    }
+  }
 </style>
