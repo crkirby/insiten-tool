@@ -419,4 +419,21 @@ export default {
 .to-dashboard {
   color: white;
 }
+
+@media (max-width: 69.9rem) { 
+    .target { 
+      flex: 0 0 90%; 
+    }
+  }
+
+@media (min-width: 100rem) { 
+    .target { 
+      flex: 0 0 42%; 
+    }
+  }
+  @media (min-width: 180rem) {
+     .target { 
+      flex: 0 0 28%; 
+    }
+  }
 </style>

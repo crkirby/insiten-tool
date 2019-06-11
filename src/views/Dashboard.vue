@@ -28,7 +28,7 @@ export default {
   components: { Acquisitions },
   methods: {
     showNewCompanyModal: function() {
-      this.$modal.show(NewCompanyModal, {}, { height: "auto" });
+      this.$modal.show(NewCompanyModal, {}, { height: "auto", adaptive: true });
     }
   }
 };

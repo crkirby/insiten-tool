@@ -57,7 +57,7 @@ export default {
     },
     showEditCompanyModal: function(company) {
       this.SET_CURRENT_COMPANY(company);
-      this.$modal.show(EditCompanyModal, {}, { height: "auto" });
+      this.$modal.show(EditCompanyModal, {}, { height: "auto", adaptive: true });
     }
   }
 };
@@ -124,4 +124,9 @@ export default {
     }
   }
 }
+@media (max-width: 54.6rem) { 
+    * {
+      font-size: 38.5%;
+    }
+  }
 </style>
